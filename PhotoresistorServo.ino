@@ -31,7 +31,8 @@ float controlSignal;
 //Setup Timer 2 and variables for ISR
 long timerCount;
 long frequency = 1000;
-int freqLimit = 10;
+int reducedFreq = 100; // frequency at which to read photoresistor
+int freqLimit = frequency/reducedFreq;
 volatile int freqCounter = 0;
 volatile bool freqFlag = false;
 
@@ -86,7 +87,7 @@ void loop() {
 
     proportional = photoError * Kp;
     integral = totalError * Ki;
-    derivative = ((photoError - prevError) * 100) * Kd; // multiply by 100 [Hz] instead of dividing by 0.01 [s]
+    derivative = ((photoError - prevError) * reducedFreq) * Kd; // multiply by sampling freq instead of dividing by time
     prevError = photoError;
     PID = proportional + integral + derivative;
     //Serial.println(PID);
