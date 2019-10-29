@@ -32,7 +32,7 @@ float interpPID;              //Linear interpolation of the PID value to convert
 
 //Set variables for timing of program
 unsigned long period = 10000; //The period, in microseconds
-float samplingFreq = 0.01;    //The sampling frequency, needed for calculation of D. Equals 1/period[s]
+float periodSec = 0.01;    //The period in seconds
 unsigned long prevTime;       //A running count of the time elapsed
 
 //The setup code, which executes only once.
@@ -55,12 +55,14 @@ void loop() {
     photoError = desiredPhoto - photoValue;  //Calculate the error signal
     //Serial.println(photoError);
 
-    proportional = photoError * Kp;  //Calculate proportional term
-    totalError = totalError + photoError;  //Calculate cumulative error
-    integral = totalError * Ki;  //Calculate integral term
-    derivative = ((photoError - prevError) / samplingFreq) * Kd; //Calculate derivative term
-                                    // multiply by sampling freq instead of dividing by time
-    prevError = photoError;  //Set previous error value to the current error before exiting
+    //Calculate the error signal (insert your code here)
+     
+    //Calculate proportional term (insert your code here)
+
+    //Calculate integral term (insert your code here)
+
+    //Calculate derivative term  (insert your code here)
+
     PID = proportional + integral + derivative;  //Sum P, I and D to get control signal
     //Serial.println(PID);
 
